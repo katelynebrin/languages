@@ -375,7 +375,7 @@ textarea::placeholder { color: var(--text3); }
   <div class="modal">
     <div class="modal-title">New learner</div>
     <div class="modal-label">Name</div>
-    <input class="modal-input" id="profileName" placeholder="e.g. Katelyn or Tom" />
+    <input class="modal-input" id="profileName" placeholder="e.g. Katelyn or Vince" />
     <div class="modal-label">Languages to practice</div>
     <div class="lang-toggle">
       <div class="lang-toggle-btn de active" id="toggleDE" onclick="toggleLang('de')">🇩🇪 German</div>
@@ -412,7 +412,7 @@ function loadState() {
         { id:'katelyn', name:'Katelyn', langs:['de','it'], color:'#8B1A1A', initial:'K',
           stats:{ de:{ sessions:0, correct:0, streak:0, level:3, lastDate:null, history:[] },
                   it:{ sessions:0, correct:0, streak:0, level:3, lastDate:null, history:[] } } },
-        { id:'tom', name:'Tom', langs:['de'], color:'#2D5016', initial:'T',
+        { id:'vince', name:'Vince', langs:['de'], color:'#2D5016', initial:'V',
           stats:{ de:{ sessions:0, correct:0, streak:0, level:1, lastDate:null, history:[] } } }
       ];
       saveState();
