@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Südtirol Languages</title>
+<style>
+:root {
+  --bg: #F7F5F0;
+  --surface: #FFFFFF;
+  --surface2: #EFEDE8;
+  --border: #E0DDD6;
+  --border2: #C8C4BB;
+  --text: #1C1A17;
+  --text2: #6B6860;
+  --text3: #A09D96;
+  --de: #2D5016;
+  --de-light: #EAF0E3;
+  --de-mid: #4A7C28;
+  --it: #8B1A1A;
+  --it-light: #F5E8E8;
+  --it-mid: #B83232;
+  --accent: #1A3A5C;
+  --accent-light: #E3EAF3;
+  --success: #2D6A4F;
+  --success-light: #E8F4EE;
+  --warn: #7A4F1A;
+  --warn-light: #F5EDE0;
+  --radius: 14px;
+  --radius-sm: 9px;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #131210;
+    --surface: #1C1A17;
+    --surface2: #242220;
+    --border: #2E2C28;
+    --border2: #3A3835;
+    --text: #F0EDE8;
+    --text2: #A09D96;
+    --text3: #6B6860;
+    --de: #7BB84A;
+    --de-light: #1A2E0A;
+    --de-mid: #5A9A30;
+    --it: #E06060;
+    --it-light: #2E1010;
+    --it-mid: #C84040;
+    --accent: #5B8EC4;
+    --accent-light: #1A2A3C;
+    --success: #52B788;
+    --success-light: #1A3A28;
+    --warn: #D4916A;
+    --warn-light: #2E1E0A;
+  }
+}
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+body {
+  font-family: -apple-system, 'SF Pro Text', 'Helvetica Neue', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+/* ── SCREENS ── */
+.screen { display: none; min-height: 100vh; }
+.screen.active { display: block; }
+
+/* ── WELCOME ── */
+.welcome-wrap {
+  display: flex; flex-direction: column; align-items: center;
+  justify-content: center; min-height: 100vh; padding: 32px 24px; text-align: center;
+}
+.app-logo {
+  font-size: 48px; margin-bottom: 12px;
+}
+.app-name {
+  font-size: 26px; font-weight: 700; letter-spacing: -0.5px; margin-bottom: 4px;
+}
+.app-sub {
+  font-size: 14px; color: var(--text2); margin-bottom: 40px;
+}
+.profile-cards {
+  display: flex; gap: 14px; width: 100%; max-width: 380px; margin-bottom: 32px;
+}
+.profile-card {
+  flex: 1; background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 22px 16px; cursor: pointer;
+  transition: border-color 0.2s, transform 0.15s;
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+}
+.profile-card:active { transform: scale(0.97); }
+.profile-card:hover { border-color: var(--border2); }
+.profile-avatar {
+  width: 52px; height: 52px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px; font-weight: 700;
+}
+.profile-name { font-size: 16px; font-weight: 600; }
+.profile-langs { font-size: 12px; color: var(--text3); }
+.profile-streak {
+  font-size: 11px; padding: 3px 9px; border-radius: 10px;
+  font-weight: 600;
+}
+.add-profile {
+  width: 100%; max-width: 380px; padding: 14px;
+  border-radius: var(--radius); border: 1px dashed var(--border2);
+  background: transparent; color: var(--text3); font-size: 14px;
+  cursor: pointer; font-family: inherit;
+}
+
+/* ── DASHBOARD ── */
+.dash-header {
+  padding: 20px 20px 0; position: sticky; top: 0; z-index: 50;
+  background: var(--surface); border-bottom: 1px solid var(--border);
+}
+.dash-top {
+  display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px;
+}
+.dash-greeting { font-size: 20px; font-weight: 700; letter-spacing: -0.3px; }
+.dash-sub { font-size: 12px; color: var(--text3); margin-top: 2px; }
+.back-btn {
+  font-size: 13px; color: var(--text2); cursor: pointer;
+  padding: 6px 10px; border-radius: var(--radius-sm);
+  border: 1px solid var(--border); background: transparent;
+  font-family: inherit;
+}
+.lang-tabs {
+  display: flex; gap: 0; border-bottom: none;
+}
+.lang-tab {
+  flex: 1; padding: 10px 8px; text-align: center; font-size: 13px;
+  font-weight: 600; cursor: pointer; border-bottom: 2.5px solid transparent;
+  color: var(--text3); transition: all 0.15s;
+}
+.lang-tab.de.active { color: var(--de-mid); border-color: var(--de-mid); }
+.lang-tab.it.active { color: var(--it-mid); border-color: var(--it-mid); }
+
+.dash-content { padding: 16px 16px 100px; }
+
+.stats-strip {
+  display: flex; gap: 10px; margin-bottom: 18px;
+}
+.stat-pill {
+  flex: 1; background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 12px 10px; text-align: center;
+}
+.stat-n { font-size: 22px; font-weight: 700; letter-spacing: -0.5px; }
+.stat-l { font-size: 10px; color: var(--text3); margin-top: 1px; text-transform: uppercase; letter-spacing: 0.5px; }
+
+.section-label {
+  font-size: 11px; font-weight: 600; letter-spacing: 0.8px;
+  text-transform: uppercase; color: var(--text3); margin: 0 0 10px 2px;
+}
+.mode-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
+.mode-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 18px 14px; cursor: pointer;
+  transition: border-color 0.15s, transform 0.12s;
+}
+.mode-card:active { transform: scale(0.97); }
+.mode-card:hover { border-color: var(--border2); }
+.mode-icon { font-size: 28px; margin-bottom: 8px; }
+.mode-name { font-size: 14px; font-weight: 600; margin-bottom: 3px; }
+.mode-desc { font-size: 12px; color: var(--text2); line-height: 1.4; }
+
+.recent-section { margin-bottom: 20px; }
+.recent-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px 14px; background: var(--surface);
+  border: 1px solid var(--border); border-radius: var(--radius-sm);
+  margin-bottom: 8px;
+}
+.recent-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.recent-text { flex: 1; font-size: 14px; }
+.recent-score {
+  font-size: 12px; font-weight: 600; padding: 3px 8px;
+  border-radius: 8px;
+}
+
+/* ── PRACTICE ── */
+.practice-header {
+  display: flex; align-items: center; gap: 12px;
+  padding: 16px 16px 12px; border-bottom: 1px solid var(--border);
+  background: var(--surface); position: sticky; top: 0; z-index: 50;
+}
+.practice-back {
+  width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--border);
+  background: var(--surface2); display: flex; align-items: center; justify-content: center;
+  cursor: pointer; font-size: 16px; flex-shrink: 0;
+}
+.practice-title { font-size: 16px; font-weight: 600; flex: 1; }
+.practice-badge {
+  font-size: 11px; padding: 4px 10px; border-radius: 10px; font-weight: 600;
+}
+.de-badge { background: var(--de-light); color: var(--de); }
+.it-badge { background: var(--it-light); color: var(--it); }
+
+.practice-body { padding: 16px; }
+
+.level-pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 12px; padding: 5px 12px; border-radius: 20px;
+  margin-bottom: 16px; font-weight: 500;
+}
+
+.scenario-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 20px; margin-bottom: 14px;
+}
+.scenario-tag {
+  font-size: 10px; font-weight: 700; letter-spacing: 0.8px;
+  text-transform: uppercase; margin-bottom: 10px;
+}
+.scenario-text {
+  font-size: 16px; line-height: 1.6; color: var(--text);
+}
+.scenario-hint {
+  font-size: 13px; color: var(--text2); margin-top: 10px;
+  padding-top: 10px; border-top: 1px solid var(--border);
+  line-height: 1.5;
+}
+
+.response-area {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden; margin-bottom: 12px;
+}
+.response-label {
+  font-size: 11px; font-weight: 600; letter-spacing: 0.5px;
+  text-transform: uppercase; color: var(--text3);
+  padding: 10px 14px 0;
+}
+textarea {
+  width: 100%; padding: 8px 14px 14px; border: none;
+  background: transparent; font-size: 15px; color: var(--text);
+  resize: none; outline: none; font-family: inherit; line-height: 1.6;
+  min-height: 90px;
+}
+textarea::placeholder { color: var(--text3); }
+
+.submit-btn {
+  width: 100%; padding: 15px; border-radius: var(--radius);
+  border: none; font-size: 15px; font-weight: 600;
+  cursor: pointer; font-family: inherit; transition: opacity 0.15s;
+}
+.submit-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.feedback-card {
+  border-radius: var(--radius); padding: 18px; margin-bottom: 12px;
+  border: 1px solid;
+}
+.feedback-card.good { background: var(--success-light); border-color: var(--success); }
+.feedback-card.okay { background: var(--warn-light); border-color: var(--warn); }
+.feedback-card.retry { background: var(--it-light); border-color: var(--it); }
+
+.feedback-score {
+  font-size: 28px; font-weight: 800; letter-spacing: -1px; margin-bottom: 4px;
+}
+.feedback-title { font-size: 15px; font-weight: 600; margin-bottom: 10px; }
+.feedback-body { font-size: 14px; line-height: 1.6; color: var(--text); }
+.feedback-model {
+  margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border2);
+  font-size: 13px; color: var(--text2); line-height: 1.5;
+}
+.feedback-model strong { color: var(--text); font-weight: 600; }
+
+.next-btn {
+  width: 100%; padding: 15px; border-radius: var(--radius);
+  border: none; font-size: 15px; font-weight: 600;
+  cursor: pointer; font-family: inherit; margin-bottom: 10px;
+}
+.skip-btn {
+  width: 100%; padding: 12px; border-radius: var(--radius);
+  border: 1px solid var(--border); background: transparent;
+  font-size: 14px; color: var(--text2); cursor: pointer; font-family: inherit;
+}
+
+.loading-wrap {
+  display: flex; flex-direction: column; align-items: center;
+  padding: 40px 20px; gap: 14px;
+}
+.spinner {
+  width: 36px; height: 36px; border-radius: 50%;
+  border: 3px solid var(--border);
+  border-top-color: var(--accent);
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.loading-text { font-size: 14px; color: var(--text2); }
+
+/* ── MODAL ── */
+.modal-overlay {
+  display: none; position: fixed; inset: 0;
+  background: rgba(0,0,0,0.45); z-index: 200; align-items: flex-end;
+}
+.modal-overlay.open { display: flex; }
+.modal {
+  background: var(--surface); border-radius: 20px 20px 0 0;
+  padding: 24px 20px 44px; width: 100%; max-width: 520px; margin: 0 auto;
+}
+.modal-title { font-size: 18px; font-weight: 700; margin-bottom: 18px; }
+.modal-input {
+  width: 100%; padding: 13px 14px; border-radius: var(--radius-sm);
+  border: 1px solid var(--border2); background: var(--surface2);
+  font-size: 15px; color: var(--text); outline: none; font-family: inherit;
+  margin-bottom: 10px;
+}
+.modal-input:focus { border-color: var(--accent); }
+.modal-row { display: flex; gap: 10px; margin-top: 6px; }
+.modal-cancel {
+  flex: 1; padding: 13px; border-radius: var(--radius-sm);
+  border: 1px solid var(--border); background: transparent;
+  color: var(--text2); font-size: 15px; cursor: pointer; font-family: inherit;
+}
+.modal-save {
+  flex: 1; padding: 13px; border-radius: var(--radius-sm);
+  border: none; background: var(--accent); color: white;
+  font-size: 15px; font-weight: 600; cursor: pointer; font-family: inherit;
+}
+.lang-toggle {
+  display: flex; gap: 8px; margin-bottom: 14px;
+}
+.lang-toggle-btn {
+  flex: 1; padding: 10px; border-radius: var(--radius-sm);
+  border: 1px solid var(--border); background: var(--surface2);
+  font-size: 14px; font-weight: 500; cursor: pointer; font-family: inherit;
+  color: var(--text2); transition: all 0.15s; text-align: center;
+}
+.lang-toggle-btn.de.active { background: var(--de-light); border-color: var(--de-mid); color: var(--de); }
+.lang-toggle-btn.it.active { background: var(--it-light); border-color: var(--it-mid); color: var(--it); }
+.modal-label { font-size: 12px; color: var(--text3); margin-bottom: 8px; font-weight: 500; }
+</style>
+</head>
+<body>
+
+<!-- WELCOME SCREEN -->
+<div class="screen active" id="welcomeScreen">
+  <div class="welcome-wrap">
+    <div class="app-logo">🏔️</div>
+    <div class="app-name">Südtirol Practice</div>
+    <div class="app-sub">German & Italian for the real world</div>
+    <div class="profile-cards" id="profileCards"></div>
+    <button class="add-profile" onclick="openNewProfile()">+ Add new learner</button>
+  </div>
+</div>
+
+<!-- DASHBOARD SCREEN -->
+<div class="screen" id="dashScreen">
+  <div class="dash-header">
+    <div class="dash-top">
+      <div>
+        <div class="dash-greeting" id="dashGreeting"></div>
+        <div class="dash-sub" id="dashSub"></div>
+      </div>
+      <button class="back-btn" onclick="goWelcome()">Switch</button>
+    </div>
+    <div class="lang-tabs" id="langTabs"></div>
+  </div>
+  <div class="dash-content" id="dashContent"></div>
+</div>
+
+<!-- PRACTICE SCREEN -->
+<div class="screen" id="practiceScreen">
+  <div class="practice-header">
+    <div class="practice-back" onclick="goDash()">←</div>
+    <div class="practice-title" id="practiceTitle"></div>
+    <div class="practice-badge" id="practiceBadge"></div>
+  </div>
+  <div class="practice-body" id="practiceBody"></div>
+</div>
+
+<!-- NEW PROFILE MODAL -->
+<div class="modal-overlay" id="profileModal">
+  <div class="modal">
+    <div class="modal-title">New learner</div>
+    <div class="modal-label">Name</div>
+    <input class="modal-input" id="profileName" placeholder="e.g. Katelyn or Tom" />
+    <div class="modal-label">Languages to practice</div>
+    <div class="lang-toggle">
+      <div class="lang-toggle-btn de active" id="toggleDE" onclick="toggleLang('de')">🇩🇪 German</div>
+      <div class="lang-toggle-btn it" id="toggleIT" onclick="toggleLang('it')">🇮🇹 Italian</div>
+    </div>
+    <div class="modal-row">
+      <button class="modal-cancel" onclick="closeProfileModal()">Cancel</button>
+      <button class="modal-save" onclick="saveProfile()">Create</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const STORE = 'sudtirol_v2';
+const AVATARS = ['#2D5016','#8B1A1A','#1A3A5C','#5A2D82','#7A4F1A','#1A5C4A'];
+const AVATAR_NAMES = ['K','T','A','M','J','S'];
+
+// ── STATE ──
+let state = {
+  profiles: [],
+  currentProfile: null,
+  currentLang: 'de',
+  currentMode: null,
+  session: null
+};
+
+function loadState() {
+  try {
+    const s = JSON.parse(localStorage.getItem(STORE) || '{}');
+    state.profiles = s.profiles || [];
+    // Seed defaults if empty
+    if (state.profiles.length === 0) {
+      state.profiles = [
+        { id:'katelyn', name:'Katelyn', langs:['de','it'], color:'#8B1A1A', initial:'K',
+          stats:{ de:{ sessions:0, correct:0, streak:0, level:3, lastDate:null, history:[] },
+                  it:{ sessions:0, correct:0, streak:0, level:3, lastDate:null, history:[] } } },
+        { id:'tom', name:'Tom', langs:['de'], color:'#2D5016', initial:'T',
+          stats:{ de:{ sessions:0, correct:0, streak:0, level:1, lastDate:null, history:[] } } }
+      ];
+      saveState();
+    }
+  } catch(e) {}
+}
+
+function saveState() {
+  localStorage.setItem(STORE, JSON.stringify({ profiles: state.profiles }));
+}
+
+function getProfile(id) { return state.profiles.find(p => p.id === id); }
+function getCurrentProfile() { return getProfile(state.currentProfile); }
+function getLangStats() {
+  const p = getCurrentProfile();
+  return p?.stats?.[state.currentLang] || {};
+}
+
+// ── SCREENS ──
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0,0);
+}
+
+function goWelcome() { showScreen('welcomeScreen'); renderWelcome(); }
+function goDash() { showScreen('dashScreen'); renderDash(); }
+
+// ── WELCOME ──
+function renderWelcome() {
+  const el = document.getElementById('profileCards');
+  el.innerHTML = state.profiles.map(p => {
+    const langs = p.langs.map(l => l === 'de' ? '🇩🇪' : '🇮🇹').join(' ');
+    const totalSessions = Object.values(p.stats).reduce((a,s)=>a+(s.sessions||0),0);
+    return `<div class="profile-card" onclick="selectProfile('${p.id}')">
+      <div class="profile-avatar" style="background:${p.color}20;color:${p.color}">${p.initial}</div>
+      <div class="profile-name">${p.name}</div>
+      <div class="profile-langs">${langs}</div>
+      <div class="profile-streak" style="background:${p.color}20;color:${p.color}">${totalSessions} sessions</div>
+    </div>`;
+  }).join('');
+}
+
+function selectProfile(id) {
+  state.currentProfile = id;
+  const p = getProfile(id);
+  state.currentLang = p.langs[0];
+  goDash();
+}
+
+// ── DASHBOARD ──
+function renderDash() {
+  const p = getCurrentProfile();
+  document.getElementById('dashGreeting').textContent = `Hey, ${p.name}! 👋`;
+  document.getElementById('dashSub').textContent = 'What are you practicing today?';
+
+  // Lang tabs
+  const tabsEl = document.getElementById('langTabs');
+  tabsEl.innerHTML = p.langs.map(l => `
+    <div class="lang-tab ${l} ${l===state.currentLang?'active':''}" onclick="switchLang('${l}')">
+      ${l==='de'?'🇩🇪 German':'🇮🇹 Italian'}
+    </div>`).join('');
+
+  renderDashContent();
+}
+
+function switchLang(lang) {
+  state.currentLang = lang;
+  renderDash();
+}
+
+function renderDashContent() {
+  const p = getCurrentProfile();
+  const s = getLangStats();
+  const lang = state.currentLang;
+  const levelLabel = ['','Beginner','Elementary','Intermediate','Upper-Intermediate','Advanced'][Math.min(s.level||1,5)];
+  const correct = s.correct || 0;
+  const sessions = s.sessions || 0;
+  const pct = sessions > 0 ? Math.round((correct / (sessions)) * 100) : 0;
+
+  const modes = lang === 'de' ? [
+    { id:'conversation', icon:'💬', name:'Real Conversation', desc:'Scenario-based dialogue practice' },
+    { id:'listening', icon:'👂', name:'Listen & Respond', desc:'Read a scenario, reply naturally' },
+    { id:'reading', icon:'📖', name:'Reading', desc:'Menus, signs, messages in German' },
+    { id:'vocab', icon:'🃏', name:'Vocabulary', desc:'Words from alpine, travel, food topics' },
+  ] : [
+    { id:'conversation', icon:'💬', name:'Fast Response', desc:'Quick replies — no overthinking' },
+    { id:'listening', icon:'👂', name:'Listen & Respond', desc:'Natural speech scenarios' },
+    { id:'reading', icon:'📖', name:'Reading', desc:'Authentic Italian text' },
+    { id:'immersion', icon:'🌊', name:'Immersion', desc:'Full Italian — no English hints' },
+  ];
+
+  const history = (s.history || []).slice(-3).reverse();
+
+  document.getElementById('dashContent').innerHTML = `
+    <div class="stats-strip">
+      <div class="stat-pill">
+        <div class="stat-n" style="color:${lang==='de'?'var(--de-mid)':'var(--it-mid)'}">${levelLabel}</div>
+        <div class="stat-l">Level</div>
+      </div>
+      <div class="stat-pill">
+        <div class="stat-n">${sessions}</div>
+        <div class="stat-l">Sessions</div>
+      </div>
+      <div class="stat-pill">
+        <div class="stat-n">${pct}%</div>
+        <div class="stat-l">Accuracy</div>
+      </div>
+    </div>
+
+    <div class="section-label">Practice modes</div>
+    <div class="mode-grid">
+      ${modes.map(m => `
+        <div class="mode-card" onclick="startPractice('${m.id}')">
+          <div class="mode-icon">${m.icon}</div>
+          <div class="mode-name">${m.name}</div>
+          <div class="mode-desc">${m.desc}</div>
+        </div>`).join('')}
+    </div>
+
+    ${history.length > 0 ? `
+      <div class="section-label">Recent practice</div>
+      <div class="recent-section">
+        ${history.map(h => `
+          <div class="recent-item">
+            <div class="recent-dot" style="background:${h.score>=70?'var(--success)':h.score>=45?'var(--warn)':'var(--it)'}"></div>
+            <div class="recent-text">${h.mode} — ${h.topic}</div>
+            <div class="recent-score" style="background:${h.score>=70?'var(--success-light)':h.score>=45?'var(--warn-light)':'var(--it-light)'};color:${h.score>=70?'var(--success)':h.score>=45?'var(--warn)':'var(--it)'}">${h.score}%</div>
+          </div>`).join('')}
+      </div>` : ''}
+  `;
+}
+
+// ── PRACTICE ──
+function startPractice(mode) {
+  state.currentMode = mode;
+  state.session = { mode, lang: state.currentLang, questionNum: 0, scores: [] };
+  showScreen('practiceScreen');
+
+  const lang = state.currentLang;
+  const modeNames = {
+    conversation:'Real Conversation', listening:'Listen & Respond',
+    reading:'Reading', vocab:'Vocabulary', immersion:'Immersion', fast:'Fast Response'
+  };
+
+  document.getElementById('practiceTitle').textContent = modeNames[mode] || mode;
+  const badge = document.getElementById('practiceBadge');
+  badge.textContent = lang === 'de' ? '🇩🇪 German' : '🇮🇹 Italian';
+  badge.className = 'practice-badge ' + (lang==='de'?'de-badge':'it-badge');
+
+  loadNextQuestion();
+}
+
+async function loadNextQuestion() {
+  const body = document.getElementById('practiceBody');
+  const s = getLangStats();
+  const level = s.level || 1;
+  const lang = state.currentLang;
+  const mode = state.currentMode;
+  const p = getCurrentProfile();
+
+  body.innerHTML = `<div class="loading-wrap">
+    <div class="spinner"></div>
+    <div class="loading-text">Generating your scenario…</div>
+  </div>`;
+
+  const levelLabel = ['','beginner','elementary','intermediate','upper-intermediate','advanced'][Math.min(level,5)];
+
+  const prompts = {
+    de: {
+      conversation: `You are a German language tutor helping a ${levelLabel} English-speaking learner practice German for travel in South Tyrol (Alto Adige), Italy. Generate a realistic conversation scenario. The learner might encounter this at a mountain hut, hotel, restaurant, market, or hiking trail in South Tyrol.
+
+Return ONLY valid JSON with this exact structure (no markdown, no extra text):
+{"scenario":"[2-3 sentences in German describing the situation and what someone says to them — a question or statement they must respond to]","context":"[1 sentence in English explaining the situation]","hint":"[In English: brief grammar tip or vocabulary hint appropriate for ${levelLabel} level]","topic":"[1-2 word topic like: Restaurant, Hiking, Hotel, Market, Directions]","english":"[English translation of the scenario]"}`,
+
+      listening: `You are a German language tutor. Create a 'listen and respond' scenario for a ${levelLabel} learner. Present something they'd hear spoken quickly in South Tyrol, Germany or Austria.
+
+Return ONLY valid JSON (no markdown):
+{"scenario":"[What they hear — 1-2 sentences in German, could be an announcement, question, or comment]","context":"[English: where they are and who's speaking]","hint":"[English: key vocabulary or phrase they need to understand]","topic":"[1-2 word topic]","english":"[English translation]"}`,
+
+      reading: `Create a German reading comprehension for a ${levelLabel} learner. Use authentic text: a menu item, trail sign, hotel notice, market sign, or short message — the kind found in South Tyrol.
+
+Return ONLY valid JSON (no markdown):
+{"scenario":"[The German text to read — could include a question at the end asking them to respond to it or explain what it means]","context":"[English: what kind of text this is and where they'd see it]","hint":"[English: key words to know]","topic":"[1-2 word topic]","english":"[English translation]"}`,
+
+      vocab: `Create a vocabulary challenge in German for a ${levelLabel} learner focused on South Tyrol / alpine / travel / food topics. Give them a word or phrase in context.
+
+Return ONLY valid JSON (no markdown):
+{"scenario":"[A sentence or two in German using the target word(s) in context, ending with a prompt asking them to use the word in their own sentence OR explain what it means]","context":"[English: the word(s) being practiced and why they matter in South Tyrol]","hint":"[English: grammar note or usage tip]","topic":"[1-2 word topic]","english":"[English translation of scenario]"}`
+    },
+    it: {
+      conversation: `You are an Italian language tutor helping an upper-intermediate English speaker practice Italian. They run a travel business in South Tyrol and need to speak confidently with locals. Their weakness is responding quickly under pressure without freezing.
+
+Create a fast-paced, realistic Italian scenario. Make it feel like real spoken Italian — natural, slightly fast, colloquial.
+
+Return ONLY valid JSON (no markdown):
+{"scenario":"[2-3 sentences of natural spoken Italian — what someone says to them quickly]","context":"[English: the situation]","hint":"[English: one quick tip to help them respond naturally]","topic":"[1-2 word topic]","english":"[English translation]"}`,
+
+      listening: `You are an Italian tutor. Create a realistic 'listen and respond' scenario for an upper-intermediate learner who struggles with natural spoken speed. Simulate real, slightly fast Italian speech.
+
+Return ONLY valid JSON (no markdown):
+{"scenario":"[Natural Italian speech — 2-3 sentences, as if overheard or spoken directly to them]","context":"[English: location and speaker]","hint":"[English: key phrase or response strategy]","topic":"[1-2 word topic]","english":"[English translation]"}`,
+
+      reading: `Create an Italian reading challenge for an upper-intermediate learner. Use authentic text from South Tyrol / northern Italy: restaurant menu, tourist notice, newspaper snippet, text message, Instagram caption, or shop sign.
+
+Return ONLY valid JSON (no markdown):
+{"scenario":"[The authentic Italian text plus a question asking them to respond to it or summarize it in Italian]","context":"[English: what this text is and where it's from]","hint":"[English: tricky phrases to note]","topic":"[1-2 word topic]","english":"[English translation]"}`,
+
+      immersion: `Create a full Italian immersion challenge for an upper-intermediate learner. Everything — instructions, scenario, prompt — should be in Italian only. No English.
+
+Return ONLY valid JSON (no markdown):
+{"scenario":"[The entire scenario AND response prompt in Italian only — 3-4 sentences]","context":"[Also in Italian — brief setting description]","hint":"[A short Italian tip — no English]","topic":"[1-2 word topic in Italian]","english":"[English translation of everything above — for reference after they respond]"}`
+    }
+  };
+
+  const systemPrompt = (prompts[lang] || prompts.de)[mode] || prompts.de.conversation;
+
+  try {
+    const resp = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        messages: [{ role: 'user', content: systemPrompt }]
+      })
+    });
+    const data = await resp.json();
+    const raw = data.content?.find(b => b.type === 'text')?.text || '';
+    const clean = raw.replace(/```json|```/g,'').trim();
+    const q = JSON.parse(clean);
+    renderQuestion(q);
+  } catch(e) {
+    body.innerHTML = `<div class="loading-wrap">
+      <div style="font-size:32px">⚠️</div>
+      <div class="loading-text">Couldn't load scenario. Check your connection.</div>
+      <button class="next-btn" style="background:var(--accent);color:white;margin-top:12px;" onclick="loadNextQuestion()">Try again</button>
+    </div>`;
+  }
+}
+
+function renderQuestion(q) {
+  const body = document.getElementById('practiceBody');
+  const lang = state.currentLang;
+  const s = getLangStats();
+  const levelLabel = ['','Beginner','Elementary','Intermediate','Upper-Intermediate','Advanced'][Math.min(s.level||1,5)];
+  const color = lang === 'de' ? 'var(--de-mid)' : 'var(--it-mid)';
+  const lightColor = lang === 'de' ? 'var(--de-light)' : 'var(--it-light)';
+
+  state.session.currentQ = q;
+
+  body.innerHTML = `
+    <div class="level-pill" style="background:${lightColor};color:${color}">
+      📊 ${levelLabel} · Session ${(s.sessions||0)+1}
+    </div>
+
+    <div class="scenario-card">
+      <div class="scenario-tag" style="color:${color}">${q.topic || 'Scenario'}</div>
+      <div class="scenario-text">${q.scenario}</div>
+      ${q.context ? `<div class="scenario-hint">📍 ${q.context}</div>` : ''}
+      ${q.hint ? `<div class="scenario-hint">💡 ${q.hint}</div>` : ''}
+    </div>
+
+    <div class="response-area">
+      <div class="response-label">Your response</div>
+      <textarea id="userResponse" placeholder="${lang==='de'?'Antworten Sie auf Deutsch…':'Rispondi in italiano…'}"></textarea>
+    </div>
+
+    <button class="submit-btn" id="submitBtn"
+      style="background:${color};color:white;"
+      onclick="submitResponse()">
+      Submit response
+    </button>
+
+    <button class="skip-btn" onclick="loadNextQuestion()" style="margin-top:8px;">
+      Skip this one
+    </button>
+  `;
+
+  document.getElementById('userResponse').focus();
+}
+
+async function submitResponse() {
+  const userText = document.getElementById('userResponse').value.trim();
+  if (!userText) return;
+
+  document.getElementById('submitBtn').disabled = true;
+  const body = document.getElementById('practiceBody');
+  const q = state.session.currentQ;
+  const lang = state.currentLang;
+  const s = getLangStats();
+  const levelLabel = ['','beginner','elementary','intermediate','upper-intermediate','advanced'][Math.min(s.level||1,5)];
+
+  // Show partial loading while keeping question visible
+  const feedbackDiv = document.createElement('div');
+  feedbackDiv.innerHTML = `<div class="loading-wrap" style="padding:20px 0;">
+    <div class="spinner"></div>
+    <div class="loading-text">Evaluating your response…</div>
+  </div>`;
+  body.appendChild(feedbackDiv);
+
+  const evalPrompt = `You are an encouraging but honest ${lang==='de'?'German':'Italian'} language tutor. A ${levelLabel} learner responded to this scenario:
+
+SCENARIO: ${q.scenario}
+CONTEXT: ${q.context || ''}
+LEARNER'S RESPONSE: ${userText}
+
+Evaluate their response and return ONLY valid JSON (no markdown, no extra text):
+{
+  "score": [integer 0-100],
+  "title": "[one short encouraging phrase, 3-5 words]",
+  "feedback": "[2-3 sentences: what they did well, what to improve. Be specific and kind.]",
+  "model_response": "[A natural, correct ${lang==='de'?'German':'Italian'} response to the scenario that they can learn from. 1-3 sentences.]",
+  "model_english": "[English translation of model response]",
+  "level_adjust": [${s.level||1} adjusted up or down by at most 1 based on performance — if score >= 80 and level < 5 increase by 1, if score < 40 and level > 1 decrease by 1, otherwise keep same]
+}`;
+
+  try {
+    const resp = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        messages: [{ role: 'user', content: evalPrompt }]
+      })
+    });
+    const data = await resp.json();
+    const raw = data.content?.find(b => b.type === 'text')?.text || '';
+    const clean = raw.replace(/```json|```/g,'').trim();
+    const fb = JSON.parse(clean);
+
+    // Update stats
+    const profile = getCurrentProfile();
+    const langStats = profile.stats[lang];
+    langStats.sessions = (langStats.sessions || 0) + 1;
+    langStats.correct = (langStats.correct || 0) + (fb.score >= 60 ? 1 : 0);
+    langStats.level = fb.level_adjust || langStats.level;
+    langStats.lastDate = new Date().toISOString();
+    langStats.history = langStats.history || [];
+    langStats.history.push({ mode: state.currentMode, topic: q.topic, score: fb.score, ts: Date.now() });
+    if (langStats.history.length > 20) langStats.history.shift();
+    saveState();
+
+    const cardClass = fb.score >= 70 ? 'good' : fb.score >= 45 ? 'okay' : 'retry';
+    const color = lang === 'de' ? 'var(--de-mid)' : 'var(--it-mid)';
+
+    feedbackDiv.innerHTML = `
+      <div class="feedback-card ${cardClass}">
+        <div class="feedback-score">${fb.score}/100</div>
+        <div class="feedback-title">${fb.title}</div>
+        <div class="feedback-body">${fb.feedback}</div>
+        <div class="feedback-model">
+          <strong>A natural response:</strong><br>
+          ${fb.model_response}<br>
+          <span style="color:var(--text3);font-style:italic">${fb.model_english}</span>
+        </div>
+      </div>
+
+      <button class="next-btn" style="background:${color};color:white;" onclick="loadNextQuestion()">
+        Next scenario →
+      </button>
+      <button class="skip-btn" onclick="goDash()">Back to dashboard</button>
+    `;
+
+  } catch(e) {
+    feedbackDiv.innerHTML = `<div class="loading-wrap">
+      <div class="loading-text">Error evaluating. Try again.</div>
+      <button class="next-btn" style="background:var(--accent);color:white;margin-top:8px;" onclick="submitResponse()">Retry</button>
+    </div>`;
+    document.getElementById('submitBtn').disabled = false;
+  }
+}
+
+// ── NEW PROFILE ──
+let newLangs = ['de'];
+function openNewProfile() {
+  newLangs = ['de'];
+  document.getElementById('toggleDE').className = 'lang-toggle-btn de active';
+  document.getElementById('toggleIT').className = 'lang-toggle-btn it';
+  document.getElementById('profileName').value = '';
+  document.getElementById('profileModal').classList.add('open');
+}
+function closeProfileModal() {
+  document.getElementById('profileModal').classList.remove('open');
+}
+function toggleLang(l) {
+  if (newLangs.includes(l)) {
+    if (newLangs.length === 1) return;
+    newLangs = newLangs.filter(x => x !== l);
+  } else {
+    newLangs.push(l);
+  }
+  document.getElementById('toggleDE').className = 'lang-toggle-btn de' + (newLangs.includes('de') ? ' active' : '');
+  document.getElementById('toggleIT').className = 'lang-toggle-btn it' + (newLangs.includes('it') ? ' active' : '');
+}
+function saveProfile() {
+  const name = document.getElementById('profileName').value.trim();
+  if (!name) return;
+  const colors = AVATARS;
+  const color = colors[state.profiles.length % colors.length];
+  const id = name.toLowerCase().replace(/\s+/g,'_') + '_' + Date.now();
+  const stats = {};
+  newLangs.forEach(l => {
+    stats[l] = { sessions:0, correct:0, streak:0, level:1, lastDate:null, history:[] };
+  });
+  state.profiles.push({ id, name, langs:[...newLangs], color, initial:name[0].toUpperCase(), stats });
+  saveState();
+  closeProfileModal();
+  renderWelcome();
+}
+
+document.getElementById('profileModal').addEventListener('click', function(e) {
+  if (e.target === this) closeProfileModal();
+});
+
+// ── INIT ──
+loadState();
+renderWelcome();
+</script>
+</body>
+</html>
